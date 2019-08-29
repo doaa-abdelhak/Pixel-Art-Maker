@@ -28,12 +28,14 @@ $(function() {
         const width = $('#input_width').val();
         const height = $('#input_height').val();
 
-        for (let r = 0; r < width; r++) {
-            const row = $('<tr></tr>');
-
-            for (let c = 0; c < height; c++) {
+        for (let c = 0; c < height; c++) {
                 const cell = $('<td></td>');
                 $(row).append(cell);
+            
+            for (let r = 0; r < width; r++) {
+                const row = $('<tr></tr>');
+
+            
 
                 // Event listener that sets background-color for each pixel
                 $(cell).click(function() {
