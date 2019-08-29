@@ -29,10 +29,10 @@ $(function() {
         const height = $('#input_height').val();
 
         for (let c = 0; c < height; c++) {
-                const cell = $('<td></td>');
+            const cell = $('<td></td>');
                 $(row).append(cell);
             
-            for (let r = 0; r < width; r++) {
+             for (let r = 0; r < width; r++) {
                 const row = $('<tr></tr>');
 
             
