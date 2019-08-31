@@ -1,56 +1,41 @@
-$(function() {
-    'use strict';
+// Grid mount function
+function makeGrid() {
 
+  // Storing grid height value
+  const gridHeight = document.getElementById('input_height').value;
+  // Storing grid width value
+  const gridWidth = document.getElementById('input_width').value;
+  // Storing table canvas
+  const canvas = document.getElementById('pixel_canvas');
 
-    // DOM pointers
-    const canvasEl = $('#pixel_canvas');
-    const sizePickerEl = $('#sizePicker');
+  // Delete rows to start
+  canvas.innerHTML = '';
 
-    // Set color
-    function setColor() {
-        const colorVal = $('#colorPicker').val();
-        return colorVal;
+  // Another way to delete rows
+  // while (canvas.rows.length > 0) {
+  //   canvas.deleteRow(0);
+  // }
+
+  // Loop to insert the rows
+  for (let i = 0; i < gridHeight; i++) {
+    let row = canvas.insertRow(i);
+
+    // Loop to insert the cells
+    for (let j = 0; j < gridWidth; j++) {
+      let cell = row.insertCell(j);
+
+      // Add click event to the cells
+      cell.addEventListener('click', function(event) {
+        // When the cell is clicked, the background color changes to the selected color
+        event.target.style.backgroundColor = document.getElementById('colorPicker').value;
+      });
     }
+  }
+}
 
-
-    // Delete grid
-    function deleteGrid() {
-        $(canvasEl).empty();
-    }
-
-
-    // Create grid
-    function makeGrid() {
-
-        // Before adding new rows to the table, delete the existing ones first
-        deleteGrid();
-
-        const width = $('#input_width').val();
-        const height = $('#input_height').val();
-
-        for (let c = 0; c < height; c++) {
-            const cell = $('<td></td>');
-                $(row).append(cell);
-            
-             for (let r = 0; r < width; r++) {
-                const row = $('<tr></tr>');
-
-            
-
-                // Event listener that sets background-color for each pixel
-                $(cell).click(function() {
-                    cell.css('background-color', setColor());
-                });
-            }
-
-            $(canvasEl).append(row);
-        }
-    }
-
-
-    // Event listener that invokes makeGrid() function
-    sizePickerEl.on('submit', function(e) {
-        e.preventDefault();
-        makeGrid();
-    });
+// Add click event to the submit input
+document.getElementById('sizePicker').addEventListener('submit', function(event) {
+  event.preventDefault();
+  // When the data is submitted the grid mount function is called
+  makeGrid();
 });
